@@ -1,61 +1,48 @@
 import jarray
 import jmri
 
-class brejlovec_najbrt(dcc_automated_routes) :
-   
-    def init(self):
+class BrejlovecNajbrt(base_automated_route):
 
-        self.rychlost_stanice = 0.1
-        self.rychlost_jizda = 0.2
-        self.rychlost_koridor = 0.25
+    ADDRESS = 6
+    SENSOR_AUTO = "IS60"
+    SENSOR_BLOCK = "IS61"
 
-        self.adresa = 17
-        self.sensor_1 = "IS60"
-        self.sensor_2 = "IS61"
-        
-        self.smer = False #True - neotočený, False - otočený
-        self.priority = 1
+    def __init__(self):
+        self.throttle = self.getThrottle(self.ADDRESS, False)
+        self.auto = sensors.provideSensor(self.SENSOR_AUTO)
+        self.auto_s = sensors.provideSensor(self.SENSOR_BLOCK)
 
-        self.zh_a_1 = 5000
-        self.zh_a_2 = 5000
-        self.zh_a_3 = 5000
-        
-        self.hz_b_1 = 3000
-        self.hz_b_2 = 3000
-        self.hz_b_3 = 3000
+        self.z1wait = 8500
+        self.z2wait = 5500
+        self.z3wait = 6400
+        self.z4wait = 4500
+        self.z5wait = 3500
 
         self.h1wait = 4000
-        self.z3wait = 6400
+        self.h3wait = 4600
+
+        self.zh_a_1 = 2000
+        self.zh_a_2 = 2000
+        self.zh_a_3 = 2000
         
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
+        self.hz_b_1 = 2000
+        self.hz_b_2 = 2000
+        self.hz_b_3 = 2000
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
+        self.rychlost_stanice = 0.3
+        self.rychlost_jizda = 0.6
+        self.rychlost_koridor = 0.7
 
-            self.throttle.setF0(True)
+        self.smer = False
+        self.priority = 1
 
-            self.zabreh_3_odj_a()
-            self.autoblock_zh_a()
-            self.hostejn_1_pjz_a()
-            self.autoblock_hz_b()
-            self.zabreh_3_vj_b()
-            
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE):
-                return 1
-            else:
-                return 0   
+    def run_route(self):
+        self.throttle.setF0(True)
+        self.hostejn_3_odj_b()
+        self.autoblock_hz_b()
+        self.zabreh_smer_b_24351()
+        self.autoblock_zh_a()
+        self.hostejn_3_vj_a()
 
-brejlovec_najbrt().start()
 
+BrejlovecNajbrt().start()

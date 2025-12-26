@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/xml/XSLT/roster2array.xsl" type="text/xsl"?>
 <roster-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/roster.xsd">
-  <!--Written by JMRI version 5.13.6+R339808d486 on Sat Nov 15 17:44:58 CET 2025-->
+  <!--Written by JMRI version 5.14+Rdea51dcccf on Thu Dec 25 14:45:36 CET 2025-->
   <roster>
     <locomotive id="ARD-8VYH-1" fileName="ARD_8VYH_1.xml" roadNumber="8x výhýbky" roadName="SŽDC" mfg="dccdoma.cz" owner="Radoslav" model="" dccAddress="200" comment="" developerID="" manufacturerID="" productID="" decoderModes="" maxSpeed="100" imageFilePath="preference:roster/55015 UNI16ARD s popisem.jpg" iconFilePath="preference:roster/55015 UNI16ARD s popisem.jpg" URL="" IsShuntingOn="">
       <dateUpdated>2020-09-12T08:26:29.187+00:00</dateUpdated>

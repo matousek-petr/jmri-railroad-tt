@@ -456,3 +456,28 @@ class dcc_automated_routes(dcc_basic_routes):
     def zabreh5bk_sobotin_zabreh5bk(self):  self.zabreh_sobotin_zabreh(self.zabreh_5bk_odj, self.zabreh_5bk_vj, self.zabreh_5_odj_c, self.zabreh_5_vj_c, True, z5_petrov)
     def zabreh5_sobotin_zabreh5(self):      self.zabreh_sobotin_zabreh(self.zabreh_5bk_odj, self.zabreh_5bk_vj, self.zabreh_5_odj_c, self.zabreh_5_vj_c, False, z5_petrov)
     def zabreh3_sobotin_zabreh3(self):      self.zabreh_sobotin_zabreh(self.zabreh_5bk_odj, self.zabreh_5bk_vj, self.zabreh_3_odj_c, self.zabreh_3_vj_c, False, z3_petrov)
+
+class base_automated_route(dcc_automated_routes):
+    """
+    Common skeleton for automated routes.
+    Child classes only implement run_route().
+    """
+
+    def handle(self):
+        if self.auto_s.getKnownState() == ACTIVE:
+            return 0
+
+        self.auto_s.setKnownState(ACTIVE)
+
+        try:
+            self.run_route()
+        finally:
+            self.auto_s.setKnownState(INACTIVE)
+
+        return 1 if self.auto.getKnownState() == ACTIVE else 0
+
+    def run_route(self):
+        """
+        Must be implemented by subclasses.
+        """
+        raise NotImplementedError
