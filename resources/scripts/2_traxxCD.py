@@ -7,7 +7,7 @@ class traxx(base_automated_route):
     sens_start = "IS62"
     running = "IS63"
 
-    def __init__(self):
+    def init(self):
         self.throttle = self.getThrottle(self.address, False)
         self.auto = sensors.provideSensor(self.sens_start)
         self.auto_s = sensors.provideSensor(self.running)
