@@ -1,9 +1,16 @@
 import jarray
 import jmri
 
-class traxx(dcc_automated_routes) :
-   
-    def init(self):
+class traxx(base_automated_route):
+
+    address = 2
+    sens_start = "IS62"
+    running = "IS63"
+
+    def __init__(self):
+        self.throttle = self.getThrottle(self.address, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
 
         self.rychlost_stanice = 0.4
         self.rychlost_jizda = 0.55
@@ -23,41 +30,14 @@ class traxx(dcc_automated_routes) :
         self.h2wait = 8700
         self.h4wait = 9700
         self.z2wait = 9100
-    
-        self.adresa = 2
-        self.sensor_1 = "IS62"
-        self.sensor_2 = "IS63"
-        
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
+    def run_route(self):
+        self.throttle.setF0(True)
 
-            self.throttle.setF0(True)
-
-            self.zabreh_2_odj_b()
-            self.autoblock_zh_b()
-            self.hostejn_smer_b()
-            self.autoblock_hz_a()
-            self.zabreh_2_vj_a()
-
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE):
-                return 1
-            else:
-                return 0
+        self.zabreh_2_odj_b()
+        self.autoblock_zh_b()
+        self.hostejn_smer_b()
+        self.autoblock_hz_a()
+        self.zabreh_2_vj_a()
 
 traxx().start()
-
-

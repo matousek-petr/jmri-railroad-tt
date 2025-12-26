@@ -3,14 +3,14 @@ import jmri
 
 class BrejlovecNajbrt(base_automated_route):
 
-    ADDRESS = 6
-    SENSOR_AUTO = "IS60"
-    SENSOR_BLOCK = "IS61"
+    addr = 6
+    sens_start = "IS60"
+    running = "IS61"
 
     def __init__(self):
-        self.throttle = self.getThrottle(self.ADDRESS, False)
-        self.auto = sensors.provideSensor(self.SENSOR_AUTO)
-        self.auto_s = sensors.provideSensor(self.SENSOR_BLOCK)
+        self.throttle = self.getThrottle(self.addr, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
 
         self.z1wait = 8500
         self.z2wait = 5500

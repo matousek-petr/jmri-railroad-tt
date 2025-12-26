@@ -1,9 +1,16 @@
 import jarray
 import jmri
 
-class regiojet_vectron(dcc_automated_routes) :
-   
-    def init(self):
+class regiojet_vectron(base_automated_route):
+
+    address = 7
+    sens_start = "IS58"
+    running = "IS59"
+
+    def __init__(self):
+        self.throttle = self.getThrottle(self.address, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
 
         self.rychlost_stanice = 0.25
         self.rychlost_jizda = 0.3
@@ -25,40 +32,14 @@ class regiojet_vectron(dcc_automated_routes) :
         self.z4wait = 4500
         self.z2wait = 4500
         self.z5wait = 2000
-    
-        self.adresa = 7
-        self.sensor_1 = "IS58"
-        self.sensor_2 = "IS59"
-        
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
+    def run_route(self):
+        self.throttle.setF0(True)
 
-            self.throttle.setF0(True)
-
-            self.zabreh_2_odj_b()
-            self.autoblock_zh_b()
-            self.hostejn_smer_b()
-            self.autoblock_hz_a()
-            self.zabreh_2_vj_a()
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE):
-                return 1
-            else:
-                return 0
+        self.zabreh_2_odj_b()
+        self.autoblock_zh_b()
+        self.hostejn_smer_b()
+        self.autoblock_hz_a()
+        self.zabreh_2_vj_a()
 
 regiojet_vectron().start()
-
-

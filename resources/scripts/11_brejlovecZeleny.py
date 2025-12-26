@@ -1,10 +1,17 @@
 import jarray
 import jmri
 
-class brejlovec_zeleny(dcc_automated_routes):
-    
-    def init(self):
-        
+class brejlovec_zeleny(base_automated_route):
+
+    address = 11
+    sens_start = "IS50"
+    running = "IS51"
+
+    def __init__(self):
+        self.throttle = self.getThrottle(self.address, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
+
         self.rychlost_stanice = 0.4
         self.rychlost_jizda = 0.6
         self.rychlost_koridor = 0.65
@@ -22,39 +29,14 @@ class brejlovec_zeleny(dcc_automated_routes):
         self.h1wait = 6600
         self.z1wait = 10900
 
-        self.adresa = 11
-        self.sensor_1 = "IS50"
-        self.sensor_2 = "IS51"
-        
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
+    def run_route(self):
+        self.throttle.setF0(True)
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
-
-            self.throttle.setF0(True)
-
-            self.zabreh_1_odj_a()
-            self.autoblock_zh_a()
-            self.hostejn_1_vj_a()
-            self.hostejn_1_odj_b()
-            self.autoblock_hz_b()
-            self.zabreh_1_vj_b()
-            
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE and powermanager.getPower() == jmri.PowerManager.ON):
-                return 1
-            else:
-                return 0
+        self.zabreh_1_odj_a()
+        self.autoblock_zh_a()
+        self.hostejn_1_vj_a()
+        self.hostejn_1_odj_b()
+        self.autoblock_hz_b()
+        self.zabreh_1_vj_b()
 
 brejlovec_zeleny().start()

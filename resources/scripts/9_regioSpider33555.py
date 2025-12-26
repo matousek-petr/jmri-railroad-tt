@@ -1,19 +1,22 @@
 import jarray
 import jmri
 
-class regiospider(dcc_automated_routes) :
-    
-    def init(self):
+class regiospider(base_automated_route):
+
+    address = 9
+    sens_start = "IS56"
+    running = "IS57"
+
+    def __init__(self):
+        self.throttle = self.getThrottle(self.address, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
 
         self.rychlost_stanice = 0.35
         self.rychlost_jizda = 0.5
         self.rychlost_koridor = 0.5
         self.smer = False
         self.priority = 1
-
-        self.adresa = 9
-        self.sensor_1 = "IS56"
-        self.sensor_2 = "IS57"
 
         self.sobotin_wait = 4400
         
@@ -41,34 +44,12 @@ class regiospider(dcc_automated_routes) :
         self.hz_b_2 = 3000
         self.hz_b_3 = 3000        
 
-        self.pauza = 180000      
-        
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
+        self.pauza = 180000
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
-            
-            self.throttle.setF0(True)
-            self.throttle.setF1(True)
+    def run_route(self):
+        self.throttle.setF0(True)
+        self.throttle.setF1(True)
 
-            self.zabreh5ak_sobotin_zabreh5ak()
+        self.zabreh5ak_sobotin_zabreh5ak()
 
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE):
-                self.waitMsec(60000)
-                return 1
-            else:
-                return 0
-   
 regiospider().start()

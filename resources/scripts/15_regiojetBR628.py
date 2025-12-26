@@ -1,9 +1,16 @@
 import jarray
 import jmri
 
-class regiojet_vectron(dcc_automated_routes) :
-   
-    def init(self):
+class regiojet_vectron(base_automated_route):
+
+    address = 15
+    sens_start = "IS72"
+    running = "IS73"
+
+    def __init__(self):
+        self.throttle = self.getThrottle(self.address, False)
+        self.auto = sensors.provideSensor(self.sens_start)
+        self.auto_s = sensors.provideSensor(self.running)
 
         self.rychlost_stanice = 0.5
         self.rychlost_jizda = 0.65
@@ -24,44 +31,18 @@ class regiojet_vectron(dcc_automated_routes) :
         self.h4wait = 5500
         self.z4wait = 6500
         self.z5wait = 4500
-    
-        self.adresa = 15
-        self.sensor_1 = "IS72"
-        self.sensor_2 = "IS73"
-        
-        self.throttle = self.getThrottle(self.adresa, False)
-        
-        self.auto = sensors.provideSensor(self.sensor_1)
-        self.auto_s = sensors.provideSensor(self.sensor_2)
-        
-        return
 
-    def handle(self):
-      
-        if (self.auto_s.getKnownState() == ACTIVE):
-            return 0
-            
-        else:
-            self.auto_s.setKnownState(ACTIVE)
+    def run_route(self):
+        self.throttle.setF0(True)
+        self.throttle.setF1(True)
+        self.throttle.setF3(True)
+        self.throttle.setF5(True)
+        self.throttle.setF6(True)
 
-            self.throttle.setF0(True)
-            self.throttle.setF1(True)
-            self.throttle.setF3(True)
-            self.throttle.setF5(True)
-            self.throttle.setF6(True)
-
-            self.zabreh_5_odj_b()
-            self.autoblock_zh_b()
-            self.hostejn_smer_b()
-            self.autoblock_hz_a()
-            self.zabreh_5_vj_a()
-            self.auto_s.setKnownState(INACTIVE)
-        
-            if (self.auto.getKnownState() == ACTIVE):
-                return 1
-            else:
-                return 0
+        self.zabreh_5_odj_b()
+        self.autoblock_zh_b()
+        self.hostejn_smer_b()
+        self.autoblock_hz_a()
+        self.zabreh_5_vj_a()
 
 regiojet_vectron().start()
-
-
