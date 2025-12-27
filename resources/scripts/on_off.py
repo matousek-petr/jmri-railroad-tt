@@ -8,11 +8,15 @@ class on_off(jmri.jmrit.automat.AbstractAutomaton) :
 
     def handle(self):
 
-        if(sensors.provideSensor("IS1").getState() == ACTIVE):
+        power = jmri.InstanceManager.getDefault(jmri.PowerManager).getPower()
+
+        if(power == jmri.PowerManager.ON):
             powermanager.setPower(jmri.PowerManager.OFF)
  
-        elif(sensors.provideSensor("IS1").getState() == INACTIVE):
+        else:
             powermanager.setPower(jmri.PowerManager.ON)
+
+        time.sleep(1)
 
         return 0
 

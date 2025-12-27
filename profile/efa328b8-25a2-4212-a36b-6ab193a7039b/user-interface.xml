@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <auxiliary-configuration xmlns="http://www.netbeans.org/ns/auxiliary-configuration/1">
     <classPreferences xmlns="http://jmri.org/xml/schema/auxiliary-configuration/class-preferences-4-3-5.xsd">
-        <preferences xmlns="" class="jmri.jmrit.beantable.SignalMastTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.LogixTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.TurnoutTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.LRouteTableAction"/>
-        <preferences xmlns="" class="jmri.managers.JmriUserPreferencesManager"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.SensorTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.SignalHeadTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.IdTagTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.SectionTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.BlockTableAction"/>
         <preferences xmlns="" class="jmri.jmrit.beantable.AudioTableAction">
             <reminderPrompts>
                 <reminder>nullAudio</reminder>
             </reminderPrompts>
         </preferences>
-        <preferences xmlns="" class="jmri.jmrit.beantable.SignalGroupTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.LightTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.TransitTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.ReporterTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.RouteTableAction"/>
-        <preferences xmlns="" class="jmri.jmrit.beantable.MemoryTableAction"/>
+        <preferences xmlns="" class="jmri.managers.JmriUserPreferencesManager"/>
     </classPreferences>
     <settings xmlns="http://jmri.org/xml/schema/auxiliary-configuration/settings-4-3-5.xsd"/>
     <tableDetails xmlns="http://jmri.org/xml/schema/auxiliary-configuration/table-details-4-3-5.xsd">
@@ -117,7 +102,21 @@
             <columns/>
         </table>
         <table xmlns="" name="jmri.jmrit.beantable.SignalMastLogicTableAction:Logika návěstidel">
-            <columns/>
+            <columns>
+                <column hidden="false" name="Zdroj" order="0" width="114"/>
+                <column hidden="false" name="Delete" order="5" width="90"/>
+                <column hidden="false" name="Cíl" order="2" width="114"/>
+                <column hidden="false" name="Poznámka" order="4" width="75"/>
+                <column hidden="false" name="Maximální rychlost " order="8" width="114"/>
+                <column hidden="false" name="DstAspect" order="3" width="114"/>
+                <column hidden="false" name="Edit" order="7" width="70"/>
+                <column hidden="false" name="Povolený" order="6" width="59"/>
+                <column hidden="false" name="SrcAspect" order="1" width="114"/>
+            </columns>
+            <sortOrder>
+                <sortKey column="0" sortOrder="ASCENDING"/>
+                <sortKey column="1" sortOrder="ASCENDING"/>
+            </sortOrder>
         </table>
         <table xmlns="" name="jmri.jmrit.beantable.BlockTableAction:Bloky">
             <columns/>
@@ -143,15 +142,25 @@
         <table xmlns="" name="jmri.jmrit.logixng.LogixNG_UserPreferences:LogixNG Tabulky">
             <columns/>
         </table>
-        <table xmlns="" name="jmri.jmrit.beantable.IdTagTableAction:RailCom">
-            <columns/>
-        </table>
     </tableDetails>
     <windowDetails xmlns="http://jmri.org/xml/schema/auxiliary-configuration/window-details-4-3-5.xsd">
-        <window xmlns="" class="jmri.jmrit.withrottle.UserInterface" height="293.0" locX="25.0" locY="69.0" width="442.0"/>
-        <window xmlns="" class="jmri.jmrit.throttle.ThrottleWindow" height="533.0" locX="1838.0" locY="220.0" width="966.0"/>
+        <window xmlns="" class="Upravit Akci" height="229.0" locX="75.0" locY="143.0" width="644.0"/>
+        <window xmlns="" class="Lokální ovladače JMRI" height="237.0" locX="75.0" locY="143.0" width="320.0"/>
         <window xmlns="" class="apps.gui3.tabbedpreferences.TabbedPreferencesFrame:Předvolby" height="1531.0" locX="75.0" locY="37.0" width="1007.0"/>
+        <window xmlns="" class="jmri.jmrit.signalling.SignallingFrame" locX="736.0" locY="311.0"/>
+        <window xmlns="" class="Upravit Proměnnou" height="220.0" locX="25.0" locY="69.0" width="512.0"/>
+        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Logix" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
+        <window xmlns="" class="PanelPro" height="267.0" locX="1674.0" locY="1185.0" width="608.0"/>
+        <window xmlns="" class="jmri.jmrit.display.controlPanelEditor.ControlPanelEditor:JOP" height="1176.0" locX="123.0" locY="171.0" width="1920.0"/>
+        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Snímače" height="1531.0" locX="55.0" locY="69.0" width="1682.0"/>
+        <window xmlns="" class="jmri.jmrit.display.controlPanelEditor.ControlPanelEditor:Ovladaci panel" height="1213.0" locX="235.0" locY="773.0" width="1920.0"/>
+        <window xmlns="" class="jmri.jmrit.roster.Roster"/>
+        <window xmlns="" class="Systémová konzole JMRI" height="1208.0" locX="885.0" locY="219.0" width="1675.0"/>
         <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Logix:1" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
+        <window xmlns="" class="jmri.jmrit.automat.monitor.AutomatTableFrame" height="484.0" locX="50.0" locY="106.0" width="453.0"/>
+        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Logika návěstidel" height="1531.0" locX="0.0" locY="37.0" width="1682.0"/>
+        <window xmlns="" class="jmri.jmrit.picker.PickFrame" height="424.0" locX="50.0" locY="106.0" width="393.0"/>
+        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Výhybky" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
         <window xmlns="" class="jmri.jmrit.beantable.LogixTableAction">
             <properties>
                 <property>
@@ -164,9 +173,15 @@
                 </property>
             </properties>
         </window>
-        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Výhybky" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
-        <window xmlns="" class="Lokální ovladače JMRI" height="237.0" locX="75.0" locY="143.0" width="320.0"/>
-        <window xmlns="" class="Systémová konzole JMRI" height="1208.0" locX="50.0" locY="106.0" width="1675.0"/>
+        <window xmlns="" class="jmri.jmrit.throttle.ThrottleWindow" height="533.0" locX="1838.0" locY="220.0" width="966.0"/>
+        <window xmlns="" class="jmri.jmrit.beantable.beanedit.SensorEditAction">
+            <properties>
+                <property>
+                    <key>selectedTabIndex</key>
+                    <value class="java.lang.Integer">0</value>
+                </property>
+            </properties>
+        </window>
         <window xmlns="" class="jmri.jmrit.beantable.beanedit.TurnoutEditAction">
             <properties>
                 <property>
@@ -175,20 +190,7 @@
                 </property>
             </properties>
         </window>
-        <window xmlns="" class="jmri.jmrit.display.controlPanelEditor.ControlPanelEditor:Ovladaci panel" height="1531.0" locX="0.0" locY="69.0" width="2560.0"/>
-        <window xmlns="" class="jmri.jmrit.beantable.beanedit.SensorEditAction">
-            <properties>
-                <property>
-                    <key>selectedTabIndex</key>
-                    <value class="java.lang.Integer">2</value>
-                </property>
-            </properties>
-        </window>
-        <window xmlns="" class="PanelPro" height="267.0" locX="976.0" locY="666.0" width="608.0"/>
-        <window xmlns="" class="jmri.jmrit.display.controlPanelEditor.ControlPanelEditor:JOP" height="1568.0" locX="0.0" locY="69.0" width="2560.0"/>
-        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Logix" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
-        <window xmlns="" class="jmri.jmrit.roster.Roster"/>
-        <window xmlns="" class="jmri.jmrit.beantable.ListedTableFrame:Snímače" height="1531.0" locX="50.0" locY="37.0" width="1682.0"/>
+        <window xmlns="" class="jmri.jmrit.withrottle.UserInterface" height="293.0" locX="1826.0" locY="191.0" width="442.0"/>
         <window xmlns="" class="jmri.jmrit.roster.swing.RosterFrame:Evidence" height="600.0" locX="50.0" locY="106.0" width="1024.0">
             <properties>
                 <property>

@@ -114,28 +114,18 @@ class dcc_basic_methods(jmri.jmrit.automat.AbstractAutomaton):
 
     def trainAutoblock(self, blocks, dir_inv, stop_time1 = 1000, stop_time2 = 1000, stop_time3 = 1000):
         self.train(self.smer, self.rychlost_koridor, dir_inv)
-        self.blockFree([blocks[0]])
         self.waitMsec(stop_time1)
         
         self.reserveBlock([blocks[1]])
+        self.blockFree([blocks[0]])
         self.train(self.smer, self.rychlost_koridor, dir_inv)
-        self.blockFree([blocks[1]])
         self.waitMsec(stop_time2)
 
         self.reserveBlock([blocks[2]])
+        self.blockFree([blocks[1]])
         self.train(self.smer, self.rychlost_koridor, dir_inv)
+        self.waitMsec(stop_time3)   
         self.blockFree([blocks[2]])
-        self.waitMsec(stop_time3)    
-
-    def signal_logic(self, block, signal, target_signal):
-        if (LS[block].getKnownState() == ACTIVE):
-            signal.setAspect("Stůj".decode("UTF-8")) 
-        
-        elif (target_signal.getAspect() == ("Stůj".decode("UTF-8"))):
-            signal.setAspect("Výstraha".decode("UTF-8"))
-            
-        else:
-            signal.setAspect("Volno".decode("UTF-8"))
                
     def trackSelect(self, block, vj, odj):
         free = True
